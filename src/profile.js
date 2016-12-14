@@ -6,16 +6,19 @@ import EmailValue from 'rheactor-value-objects/email'
  * @type Profile
  */
 export class Profile {
+  /**
+   * @param {{email: {EmailValue}, firstname: {String}, lastname: {String}, avatar: {URIValue}}} fields
+   */
   constructor (fields) {
     const {email, firstname, lastname, avatar} = fields
     EmailValue.Type(email)
     StringType(firstname)
     StringType(lastname)
     maybe(URIValue.Type)(avatar)
-    this.email = email
+    this.email = email.toString()
     this.firstname = firstname
     this.lastname = lastname
-    this.avatar = avatar
+    this.avatar = avatar ? avatar.toString() : undefined
     this.$context = ProfileContext
   }
 

@@ -41,5 +41,8 @@
     "semantic-release": "^6.3.2",
     "standard": "^8.4.0",
     "validate-commit-msg": "^2.8.2"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

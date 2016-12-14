@@ -18,6 +18,15 @@ export class StaRHsStatus {
     this.totalReceived = totalReceived
     this.$context = StaRHsStatusContext
   }
+
+  /**
+   * @param {{cycleShared: {Number}, cycleReceived: {Number}, cycleLeft: {Number}, totalShared: {Number}, totalReceived: {Number}}} data
+   * @returns {StaRHsStatus}
+   */
+  static fromJSON (data) {
+    const {cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived} = data
+    return new StaRHsStatus(cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived)
+  }
 }
 
 export const StaRHsStatusContext = 'https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus'

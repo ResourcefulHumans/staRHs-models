@@ -1,6 +1,6 @@
 {
   "name": "starhs-models",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Shared models for the staRHs API",
   "main": "src/index.js",
   "scripts": {

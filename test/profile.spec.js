@@ -25,4 +25,17 @@ describe('Profile', () => {
     expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
     expect(profile.$context).to.equal(ProfileContext)
   })
+  it('should not add spaces if name parts ar missing', () => {
+    const profile = new Profile({
+      email: new EmailValue('john.doe@example.com'),
+      firstname: '',
+      lastname: 'Doe'
+    })
+    ProfileType(profile)
+    expect(profile.email).to.be.instanceof(EmailValue)
+    expect(profile.email.toString()).to.equal('john.doe@example.com')
+    expect(profile.firstname).to.equal('')
+    expect(profile.lastname).to.equal('Doe')
+    expect(profile.name).to.equal('Doe')
+  })
 })

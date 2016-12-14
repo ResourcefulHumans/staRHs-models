@@ -23,7 +23,10 @@ export class Profile {
    * @returns {string}
    */
   get name () {
-    return [this.firstname, this.lastname].join(' ')
+    let name = this.firstname
+    if (name.length) name = name + ' '
+    name = name + this.lastname
+    return name
   }
 }
 

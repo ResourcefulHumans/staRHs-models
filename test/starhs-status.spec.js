@@ -3,7 +3,7 @@
 /* global describe, it */
 
 const expect = require('chai').expect
-import {StaRHsStatus, StaRHsStatusType} from '../src'
+import {StaRHsStatus, StaRHsStatusType, StaRHsStatusContext} from '../src/starhs-status'
 
 describe('StaRHsStatus', () => {
   it('should accept values', () => {
@@ -14,5 +14,6 @@ describe('StaRHsStatus', () => {
     expect(status.cycleLeft).to.equal(3)
     expect(status.totalShared).to.equal(4)
     expect(status.totalReceived).to.equal(5)
+    expect(status.$context).to.equal(StaRHsStatusContext)
   })
 })

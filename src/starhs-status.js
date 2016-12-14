@@ -16,9 +16,9 @@ export class StaRHsStatus {
     this.cycleLeft = cycleLeft
     this.totalShared = totalShared
     this.totalReceived = totalReceived
+    this.$context = StaRHsStatusContext
   }
 }
 
-StaRHsStatus.$context = 'https://github.com/ResourcefulHumans/staRHs-models/wiki/JsonLD#StaRHsStatus'
-
+export const StaRHsStatusContext = 'https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus'
 export const StaRHsStatusType = irreducible('StaRHsStatusType', (x) => x instanceof StaRHsStatus)

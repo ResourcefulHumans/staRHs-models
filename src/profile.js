@@ -2,9 +2,6 @@ import {String as StringType, irreducible, maybe} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import EmailValue from 'rheactor-value-objects/email'
 
-/**
- * @type Profile
- */
 export class Profile {
   /**
    * @param {{email: {EmailValue}, firstname: {String}, lastname: {String}, avatar: {URIValue}}} fields

@@ -1,9 +1,6 @@
 import {Number as NumberType, irreducible, refinement} from 'tcomb'
 const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
 
-/**
- * @type StaRHsStatus
- */
 export class StaRHsStatus {
   constructor (cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived) {
     ZeroOrPositiveIntegerType(cycleShared)

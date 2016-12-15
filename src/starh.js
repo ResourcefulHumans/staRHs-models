@@ -1,4 +1,4 @@
-import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
+import {String as StringType, Number as NumberType, irreducible, refinement, struct, maybe} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import {Model} from './model'
 import {merge} from 'lodash'
@@ -7,11 +7,11 @@ const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'P
 
 export class StaRH extends Model {
   /**
-   * @param {{from: PersonType, to: PersonType, amount: number, message: string}} fields
+   * @param {{from: PersonType, to: PersonType, amount: number, message: string, $createdAt: Date}} fields
    */
   constructor (fields) {
-    super($context)
-    const {from, to, amount, message} = fields
+    const {from, to, amount, message, $createdAt} = fields
+    super({$context, $createdAt})
     PersonType(from)
     PersonType(to)
     PositiveIntegerType(amount)
@@ -23,7 +23,7 @@ export class StaRH extends Model {
   }
 
   /**
-   * @returns {{from: string, to: string, amount: number, message: string, $context: string, $links: Array<{href: string, $context: string}>}}
+   * @returns {{from: string, to: string, amount: number, message: string, $createdAt: string, $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
     return merge(
@@ -31,11 +31,11 @@ export class StaRH extends Model {
       {
         from: {
           name: this.from.name,
-          avatar: this.from.avatar.toString()
+          avatar: this.from.avatar ? this.from.avatar.toString() : undefined
         },
         to: {
           name: this.to.name,
-          avatar: this.to.avatar.toString()
+          avatar: this.to.avatar ? this.to.avatar.toString() : undefined
         },
         amount: this.amount,
         message: this.message
@@ -48,18 +48,23 @@ export class StaRH extends Model {
    * @returns {StaRH}
    */
   static fromJSON (data) {
-    return new StaRH({
-      from: {
-        name: data.from.name,
-        avatar: new URIValue(data.from.avatar)
-      },
-      to: {
-        name: data.to.name,
-        avatar: new URIValue(data.to.avatar)
-      },
-      amount: data.amount,
-      message: data.message
-    })
+    return new StaRH(
+      merge(
+        super.fromJSON(data),
+        {
+          from: {
+            name: data.from.name,
+            avatar: data.from.avatar ? new URIValue(data.from.avatar) : undefined
+          },
+          to: {
+            name: data.to.name,
+            avatar: data.to.avatar ? new URIValue(data.to.avatar) : undefined
+          },
+          amount: data.amount,
+          message: data.message
+        }
+      )
+    )
   }
 
   /**
@@ -71,4 +76,4 @@ export class StaRH extends Model {
 }
 
 export const StaRHType = irreducible('StaRHType', (x) => x instanceof StaRH)
-export const PersonType = struct({name: StringType, avatar: URIValue.Type}, 'PersonType')
+export const PersonType = struct({name: StringType, avatar: maybe(URIValue.Type)}, 'PersonType')

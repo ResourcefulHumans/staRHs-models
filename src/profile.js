@@ -10,7 +10,7 @@ export class Profile extends Model {
    * @param {{email: EmailValue, firstname: string, lastname: string, avatar: URIValue}} fields
    */
   constructor (fields) {
-    super($context)
+    super({$context})
     const {email, firstname, lastname, avatar} = fields
     StringType(firstname)
     StringType(lastname)
@@ -53,12 +53,17 @@ export class Profile extends Model {
    */
   static fromJSON (data) {
     const {email, firstname, lastname, avatar} = data
-    return new Profile({
-      email: new EmailValue(email),
-      firstname,
-      lastname,
-      avatar: avatar ? new URIValue(avatar) : avatar
-    })
+    return new Profile(
+      merge(
+        super.fromJSON(data),
+        {
+          email: new EmailValue(email),
+          firstname,
+          lastname,
+          avatar: avatar ? new URIValue(avatar) : avatar
+        }
+      )
+    )
   }
 
   /**

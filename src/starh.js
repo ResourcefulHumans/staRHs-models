@@ -1,4 +1,4 @@
-import {String as StringType, Number as NumberType, irreducible, refinement} from 'tcomb'
+import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import {Model} from './model'
 import {merge} from 'lodash'
@@ -7,13 +7,13 @@ const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'P
 
 export class StaRH extends Model {
   /**
-   * @param {{from: string, to: string, amount: number, message: string}} fields
+   * @param {{from: PersonType, to: PersonType, amount: number, message: string}} fields
    */
   constructor (fields) {
     super($context)
     const {from, to, amount, message} = fields
-    StringType(from)
-    StringType(to)
+    PersonType(from)
+    PersonType(to)
     PositiveIntegerType(amount)
     StringType(message)
     this.from = from
@@ -29,8 +29,14 @@ export class StaRH extends Model {
     return merge(
       super.toJSON(),
       {
-        from: this.from,
-        to: this.to,
+        from: {
+          name: this.from.name,
+          avatar: this.from.avatar.toString()
+        },
+        to: {
+          name: this.to.name,
+          avatar: this.to.avatar.toString()
+        },
         amount: this.amount,
         message: this.message
       }
@@ -38,11 +44,22 @@ export class StaRH extends Model {
   }
 
   /**
-   * @param {{from: string, to: string, amount: number, message: string}} data
+   * @param {{from: {name: string, avatar: string}, to: {name: string, avatar: string}, amount: number, message: string}} data
    * @returns {StaRH}
    */
   static fromJSON (data) {
-    return new StaRH(data)
+    return new StaRH({
+      from: {
+        name: data.from.name,
+        avatar: new URIValue(data.from.avatar)
+      },
+      to: {
+        name: data.to.name,
+        avatar: new URIValue(data.to.avatar)
+      },
+      amount: data.amount,
+      message: data.message
+    })
   }
 
   /**
@@ -54,3 +71,4 @@ export class StaRH extends Model {
 }
 
 export const StaRHType = irreducible('StaRHType', (x) => x instanceof StaRH)
+export const PersonType = struct({name: StringType, avatar: URIValue.Type}, 'PersonType')

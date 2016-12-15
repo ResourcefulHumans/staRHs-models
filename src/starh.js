@@ -1,12 +1,16 @@
 import {String as StringType, Number as NumberType, irreducible, refinement} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
+import {Model} from './model'
+import {merge} from 'lodash'
+const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRH')
 const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'PositiveIntegerType')
 
-export class StaRH {
+export class StaRH extends Model {
   /**
    * @param {{from: string, to: string, amount: number, message: string}} fields
    */
   constructor (fields) {
+    super($context)
     const {from, to, amount, message} = fields
     StringType(from)
     StringType(to)
@@ -16,20 +20,21 @@ export class StaRH {
     this.to = to
     this.amount = amount
     this.message = message
-    this.$context = this.constructor.$context
   }
 
   /**
-   * @returns {{from: string, to: string, amount: number, message: string, $context: string}}
+   * @returns {{from: string, to: string, amount: number, message: string, $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return {
-      from: this.from,
-      to: this.to,
-      amount: this.amount,
-      message: this.message,
-      $context: this.$context.toString()
-    }
+    return merge(
+      super.toJSON(),
+      {
+        from: this.from,
+        to: this.to,
+        amount: this.amount,
+        message: this.message
+      }
+    )
   }
 
   /**
@@ -44,7 +49,7 @@ export class StaRH {
    * @returns {URIValue}
    */
   static get $context () {
-    return new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRH')
+    return $context
   }
 }
 

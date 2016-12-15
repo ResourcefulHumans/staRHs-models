@@ -1,12 +1,16 @@
 import {Number as NumberType, irreducible, refinement} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
+import {Model} from './model'
+import {merge} from 'lodash'
 const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
+const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus')
 
-export class StaRHsStatus {
+export class StaRHsStatus extends Model {
   /**
    * @param {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number}} fields
    */
   constructor (fields) {
+    super($context)
     const {cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived} = fields
     ZeroOrPositiveIntegerType(cycleShared)
     ZeroOrPositiveIntegerType(cycleReceived)
@@ -18,21 +22,22 @@ export class StaRHsStatus {
     this.cycleLeft = cycleLeft
     this.totalShared = totalShared
     this.totalReceived = totalReceived
-    this.$context = this.constructor.$context
   }
 
   /**
-   * @returns {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number, $context: string}}
+   * @returns {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number, $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return {
-      cycleShared: this.cycleShared,
-      cycleReceived: this.cycleReceived,
-      cycleLeft: this.cycleLeft,
-      totalShared: this.totalShared,
-      totalReceived: this.totalReceived,
-      $context: this.$context.toString()
-    }
+    return merge(
+      super.toJSON(),
+      {
+        cycleShared: this.cycleShared,
+        cycleReceived: this.cycleReceived,
+        cycleLeft: this.cycleLeft,
+        totalShared: this.totalShared,
+        totalReceived: this.totalReceived
+      }
+    )
   }
 
   /**
@@ -47,7 +52,7 @@ export class StaRHsStatus {
    * @returns {URIValue}
    */
   static get $context () {
-    return new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus')
+    return $context
   }
 }
 

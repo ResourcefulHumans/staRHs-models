@@ -1,12 +1,16 @@
 import {String as StringType, irreducible, maybe} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import EmailValue from 'rheactor-value-objects/email'
+import {Model} from './model'
+import {merge} from 'lodash'
+const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
 
-export class Profile {
+export class Profile extends Model {
   /**
    * @param {{email: EmailValue, firstname: string, lastname: string, avatar: URIValue}} fields
    */
   constructor (fields) {
+    super($context)
     const {email, firstname, lastname, avatar} = fields
     StringType(firstname)
     StringType(lastname)
@@ -16,7 +20,6 @@ export class Profile {
     this.firstname = firstname
     this.lastname = lastname
     this.avatar = avatar
-    this.$context = this.constructor.$context
   }
 
   /**
@@ -30,16 +33,18 @@ export class Profile {
   }
 
   /**
-   * @returns {{email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string}}
+   * @returns {{email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return {
-      email: this.email.toString(),
-      firstname: this.firstname,
-      lastname: this.lastname,
-      avatar: this.avatar ? this.avatar.toString() : undefined,
-      $context: this.$context.toString()
-    }
+    return merge(
+      super.toJSON(),
+      {
+        email: this.email.toString(),
+        firstname: this.firstname,
+        lastname: this.lastname,
+        avatar: this.avatar ? this.avatar.toString() : undefined
+      }
+    )
   }
 
   /**
@@ -60,7 +65,7 @@ export class Profile {
    * @returns {URIValue}
    */
   static get $context () {
-    return new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
+    return $context
   }
 }
 

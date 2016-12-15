@@ -22,6 +22,20 @@ export class StaRHsStatus {
   }
 
   /**
+   * @returns {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number, $context: string}}
+   */
+  toJSON () {
+    return {
+      cycleShared: this.cycleShared,
+      cycleReceived: this.cycleReceived,
+      cycleLeft: this.cycleLeft,
+      totalShared: this.totalShared,
+      totalReceived: this.totalReceived,
+      $context: this.$context.toString()
+    }
+  }
+
+  /**
    * @param {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number}} data
    * @returns {StaRHsStatus}
    */

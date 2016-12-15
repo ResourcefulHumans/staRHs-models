@@ -20,6 +20,19 @@ export class StaRH {
   }
 
   /**
+   * @returns {{from: string, to: string, amount: number, message: string, $context: string}}
+   */
+  toJSON () {
+    return {
+      from: this.from,
+      to: this.to,
+      amount: this.amount,
+      message: this.message,
+      $context: this.$context.toString()
+    }
+  }
+
+  /**
    * @param {{from: string, to: string, amount: number, message: string}} data
    * @returns {StaRH}
    */

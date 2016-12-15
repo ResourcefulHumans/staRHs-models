@@ -38,7 +38,7 @@ export class Profile {
       firstname: this.firstname,
       lastname: this.lastname,
       avatar: this.avatar ? this.avatar.toString() : undefined,
-      $context: this.$context
+      $context: this.$context.toString()
     }
   }
 
@@ -57,10 +57,10 @@ export class Profile {
   }
 
   /**
-   * @returns {string}
+   * @returns {URIValue}
    */
   static get $context () {
-    return 'https://github.com/ResourcefulHumans/staRHs-models#Profile'
+    return new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
   }
 }
 

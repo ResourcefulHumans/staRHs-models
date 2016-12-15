@@ -1,4 +1,5 @@
 import {String as StringType, Number as NumberType, irreducible, refinement} from 'tcomb'
+import URIValue from 'rheactor-value-objects/uri'
 const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'PositiveIntegerType')
 
 export class StaRH {
@@ -19,7 +20,7 @@ export class StaRH {
   }
 
   /**
-   * @param {{email: string, firstname: string, lastname: string, avatar: string}} data
+   * @param {{from: string, to: string, amount: number, message: string}} data
    * @returns {StaRH}
    */
   static fromJSON (data) {
@@ -27,10 +28,10 @@ export class StaRH {
   }
 
   /**
-   * @returns {string}
+   * @returns {URIValue}
    */
   static get $context () {
-    return 'https://github.com/ResourcefulHumans/staRHs-models#StaRH'
+    return new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRH')
   }
 }
 

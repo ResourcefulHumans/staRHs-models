@@ -22,7 +22,7 @@ describe('Profile', () => {
       expect(profile.lastname).to.equal('Doe')
       expect(profile.name).to.equal('John Doe')
       expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
-      expect(profile.$context).to.equal(Profile.$context)
+      expect(profile.$context.equals(Profile.$context)).to.equal(true)
     })
     it('should parse it\'s own values', () => {
       const profile = new Profile({
@@ -43,7 +43,7 @@ describe('Profile', () => {
       expect(profile2.lastname).to.equal('Doe')
       expect(profile2.name).to.equal('John Doe')
       expect(profile2.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
-      expect(profile2.$context).to.equal(Profile.$context)
+      expect(profile2.$context.equals(Profile.$context)).to.equal(true)
     })
   })
 
@@ -77,7 +77,7 @@ describe('Profile', () => {
       expect(profile.lastname).to.equal('Doe')
       expect(profile.name).to.equal('John Doe')
       expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
-      expect(profile.$context).to.equal(Profile.$context)
+      expect(profile.$context.equals(Profile.$context)).to.equal(true)
     })
   })
 })

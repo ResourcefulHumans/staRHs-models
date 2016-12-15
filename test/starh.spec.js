@@ -3,7 +3,7 @@
 /* global describe, it */
 
 const expect = require('chai').expect
-import {StaRH, StaRHType, StaRHContext} from '../src/starh'
+import {StaRH, StaRHType} from '../src/starh'
 
 describe('StaRH', () => {
   describe('constructor()', () => {
@@ -19,7 +19,7 @@ describe('StaRH', () => {
       expect(staRH.to).to.equal('Antarctica')
       expect(staRH.amount).to.equal(1)
       expect(staRH.message).to.equal('Test')
-      expect(staRH.$context).to.equal(StaRHContext)
+      expect(staRH.$context).to.equal(StaRH.$context)
     })
     it('should parse it\'s own values', () => {
       const staRH = new StaRH({
@@ -39,7 +39,7 @@ describe('StaRH', () => {
       expect(staRH2.to).to.equal('Antarctica')
       expect(staRH2.amount).to.equal(1)
       expect(staRH2.message).to.equal('Test')
-      expect(staRH2.$context).to.equal(StaRHContext)
+      expect(staRH2.$context).to.equal(StaRH.$context)
     })
   })
 
@@ -56,7 +56,7 @@ describe('StaRH', () => {
       expect(staRH.to).to.equal('Antarctica')
       expect(staRH.amount).to.equal(1)
       expect(staRH.message).to.equal('Test')
-      expect(staRH.$context).to.equal(StaRHContext)
+      expect(staRH.$context).to.equal(StaRH.$context)
     })
   })
 })

@@ -3,7 +3,7 @@
 /* global describe, it */
 
 const expect = require('chai').expect
-import {StaRHsStatus, StaRHsStatusType, StaRHsStatusContext} from '../src/starhs-status'
+import {StaRHsStatus, StaRHsStatusType} from '../src/starhs-status'
 
 describe('StaRHsStatus', () => {
   describe('constructor()', () => {
@@ -15,7 +15,7 @@ describe('StaRHsStatus', () => {
       expect(status.cycleLeft).to.equal(3)
       expect(status.totalShared).to.equal(4)
       expect(status.totalReceived).to.equal(5)
-      expect(status.$context).to.equal(StaRHsStatusContext)
+      expect(status.$context).to.equal(StaRHsStatus.$context)
     })
     it('should parse it\'s own values', () => {
       const status = new StaRHsStatus({cycleShared: 1, cycleReceived: 2, cycleLeft: 3, totalShared: 4, totalReceived: 5})
@@ -32,7 +32,7 @@ describe('StaRHsStatus', () => {
       expect(status2.cycleLeft).to.equal(3)
       expect(status2.totalShared).to.equal(4)
       expect(status2.totalReceived).to.equal(5)
-      expect(status2.$context).to.equal(StaRHsStatusContext)
+      expect(status2.$context).to.equal(StaRHsStatus.$context)
     })
   })
 
@@ -45,7 +45,7 @@ describe('StaRHsStatus', () => {
       expect(status.cycleLeft).to.equal(3)
       expect(status.totalShared).to.equal(4)
       expect(status.totalReceived).to.equal(5)
-      expect(status.$context).to.equal(StaRHsStatusContext)
+      expect(status.$context).to.equal(StaRHsStatus.$context)
     })
   })
 })

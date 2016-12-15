@@ -16,7 +16,7 @@ export class Profile {
     this.firstname = firstname
     this.lastname = lastname
     this.avatar = avatar
-    this.$context = ProfileContext
+    this.$context = this.constructor.$context
   }
 
   /**
@@ -55,7 +55,13 @@ export class Profile {
       avatar: avatar ? new URIValue(avatar) : avatar
     })
   }
+
+  /**
+   * @returns {string}
+   */
+  static get $context () {
+    return 'https://github.com/ResourcefulHumans/staRHs-models#Profile'
+  }
 }
 
-export const ProfileContext = 'https://github.com/ResourcefulHumans/staRHs-models#Profile'
 export const ProfileType = irreducible('ProfileType', (x) => x instanceof Profile)

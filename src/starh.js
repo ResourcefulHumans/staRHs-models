@@ -15,7 +15,7 @@ export class StaRH {
     this.to = to
     this.amount = amount
     this.message = message
-    this.$context = StaRHContext
+    this.$context = this.constructor.$context
   }
 
   /**
@@ -25,7 +25,13 @@ export class StaRH {
   static fromJSON (data) {
     return new StaRH(data)
   }
+
+  /**
+   * @returns {string}
+   */
+  static get $context () {
+    return 'https://github.com/ResourcefulHumans/staRHs-models#StaRH'
+  }
 }
 
-export const StaRHContext = 'https://github.com/ResourcefulHumans/staRHs-models#StaRH'
 export const StaRHType = irreducible('StaRHType', (x) => x instanceof StaRH)

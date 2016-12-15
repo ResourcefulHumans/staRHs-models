@@ -17,7 +17,7 @@ export class StaRHsStatus {
     this.cycleLeft = cycleLeft
     this.totalShared = totalShared
     this.totalReceived = totalReceived
-    this.$context = StaRHsStatusContext
+    this.$context = this.constructor.$context
   }
 
   /**
@@ -27,7 +27,13 @@ export class StaRHsStatus {
   static fromJSON (data) {
     return new StaRHsStatus(data)
   }
+
+  /**
+   * @returns {string}
+   */
+  static get $context () {
+    return 'https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus'
+  }
 }
 
-export const StaRHsStatusContext = 'https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus'
 export const StaRHsStatusType = irreducible('StaRHsStatusType', (x) => x instanceof StaRHsStatus)

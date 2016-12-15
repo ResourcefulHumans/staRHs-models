@@ -2,7 +2,11 @@ import {Number as NumberType, irreducible, refinement} from 'tcomb'
 const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
 
 export class StaRHsStatus {
-  constructor (cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived) {
+  /**
+   * @param {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number}} fields
+   */
+  constructor (fields) {
+    const {cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived} = fields
     ZeroOrPositiveIntegerType(cycleShared)
     ZeroOrPositiveIntegerType(cycleReceived)
     ZeroOrPositiveIntegerType(cycleLeft)
@@ -17,12 +21,11 @@ export class StaRHsStatus {
   }
 
   /**
-   * @param {{cycleShared: {Number}, cycleReceived: {Number}, cycleLeft: {Number}, totalShared: {Number}, totalReceived: {Number}}} data
+   * @param {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number}} data
    * @returns {StaRHsStatus}
    */
   static fromJSON (data) {
-    const {cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived} = data
-    return new StaRHsStatus(cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived)
+    return new StaRHsStatus(data)
   }
 }
 

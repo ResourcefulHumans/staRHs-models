@@ -8,7 +8,7 @@ import {StaRHsStatus, StaRHsStatusType, StaRHsStatusContext} from '../src/starhs
 describe('StaRHsStatus', () => {
   describe('constructor()', () => {
     it('should accept values', () => {
-      const status = new StaRHsStatus(1, 2, 3, 4, 5)
+      const status = new StaRHsStatus({cycleShared: 1, cycleReceived: 2, cycleLeft: 3, totalShared: 4, totalReceived: 5})
       StaRHsStatusType(status)
       expect(status.cycleShared).to.equal(1)
       expect(status.cycleReceived).to.equal(2)
@@ -18,14 +18,14 @@ describe('StaRHsStatus', () => {
       expect(status.$context).to.equal(StaRHsStatusContext)
     })
     it('should parse it\'s own values', () => {
-      const status = new StaRHsStatus(1, 2, 3, 4, 5)
-      const status2 = new StaRHsStatus(
-        status.cycleShared,
-        status.cycleReceived,
-        status.cycleLeft,
-        status.totalShared,
-        status.totalReceived
-      )
+      const status = new StaRHsStatus({cycleShared: 1, cycleReceived: 2, cycleLeft: 3, totalShared: 4, totalReceived: 5})
+      const status2 = new StaRHsStatus({
+        cycleShared: status.cycleShared,
+        cycleReceived: status.cycleReceived,
+        cycleLeft: status.cycleLeft,
+        totalShared: status.totalShared,
+        totalReceived: status.totalReceived
+      })
       StaRHsStatusType(status2)
       expect(status2.cycleShared).to.equal(1)
       expect(status2.cycleReceived).to.equal(2)
@@ -38,7 +38,7 @@ describe('StaRHsStatus', () => {
 
   describe('JSON', () => {
     it('should parse it\'s JSON representation', () => {
-      const status = StaRHsStatus.fromJSON(JSON.parse(JSON.stringify(new StaRHsStatus(1, 2, 3, 4, 5))))
+      const status = StaRHsStatus.fromJSON(JSON.parse(JSON.stringify(new StaRHsStatus({cycleShared: 1, cycleReceived: 2, cycleLeft: 3, totalShared: 4, totalReceived: 5}))))
       StaRHsStatusType(status)
       expect(status.cycleShared).to.equal(1)
       expect(status.cycleReceived).to.equal(2)

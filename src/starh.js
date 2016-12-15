@@ -3,7 +3,7 @@ const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'P
 
 export class StaRH {
   /**
-   * @param {{from: {String}, to: {String}, amount: {Number}, message: {String}}} fields
+   * @param {{from: string, to: string, amount: number, message: string}} fields
    */
   constructor (fields) {
     const {from, to, amount, message} = fields
@@ -19,7 +19,7 @@ export class StaRH {
   }
 
   /**
-   * @param {{email: {String}, firstname: {String}, lastname: {String}, avatar: {String}}} data
+   * @param {{email: string, firstname: string, lastname: string, avatar: string}} data
    * @returns {StaRH}
    */
   static fromJSON (data) {

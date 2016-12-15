@@ -4,7 +4,7 @@ import EmailValue from 'rheactor-value-objects/email'
 
 export class Profile {
   /**
-   * @param {{email: {EmailValue}, firstname: {String}, lastname: {String}, avatar: {URIValue}}} fields
+   * @param {{email: EmailValue, firstname: string, lastname: string, avatar: URIValue}} fields
    */
   constructor (fields) {
     const {email, firstname, lastname, avatar} = fields
@@ -20,7 +20,7 @@ export class Profile {
   }
 
   /**
-   * @returns {string}
+   * @returns string
    */
   get name () {
     let name = this.firstname
@@ -30,7 +30,7 @@ export class Profile {
   }
 
   /**
-   * @returns {{email: {String}, firstname: {String}, lastname: {String}, avatar: ({String}|undefined), $context: {String}}}
+   * @returns {{email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string}}
    */
   toJSON () {
     return {
@@ -43,7 +43,7 @@ export class Profile {
   }
 
   /**
-   * @param {{email: {String}, firstname: {String}, lastname: {String}, avatar: {String}}} data
+   * @param {{email: string, firstname: string, lastname: string, avatar: string}} data
    * @returns {Profile}
    */
   static fromJSON (data) {

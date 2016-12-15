@@ -1,4 +1,5 @@
 import URIValue from 'rheactor-value-objects/uri'
+import {irreducible} from 'tcomb'
 
 export class Model {
   constructor ($context) {
@@ -17,3 +18,5 @@ export class Model {
     }
   }
 }
+
+export const ModelType = irreducible('ModelType', (x) => x instanceof Model)

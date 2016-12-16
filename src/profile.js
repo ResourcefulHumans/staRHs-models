@@ -1,17 +1,17 @@
 import {String as StringType, irreducible, maybe, struct} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import EmailValue from 'rheactor-value-objects/email'
-import {Model} from './model'
+import {Entity} from './entity'
 import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
 
-export class Profile extends Model {
+export class Profile extends Entity {
   /**
-   * @param {{email: EmailValue, firstname: string, lastname: string, avatar: URIValue}} fields
+   * @param {{$id: string, email: EmailValue, firstname: string, lastname: string, avatar: URIValue}} fields
    */
   constructor (fields) {
-    super({$context})
-    const {email, firstname, lastname, avatar} = fields
+    const {$id, email, firstname, lastname, avatar} = fields
+    super({$id, $context})
     StringType(firstname)
     StringType(lastname)
     EmailValue.Type(email)
@@ -33,7 +33,7 @@ export class Profile extends Model {
   }
 
   /**
-   * @returns {{email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string, $links: Array<{href: string, $context: string}>}}
+   * @returns {{$id: string, email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
     return merge(
@@ -48,7 +48,7 @@ export class Profile extends Model {
   }
 
   /**
-   * @param {{email: string, firstname: string, lastname: string, avatar: string}} data
+   * @param {{$id: string, email: string, firstname: string, lastname: string, avatar: string}} data
    * @returns {Profile}
    */
   static fromJSON (data) {

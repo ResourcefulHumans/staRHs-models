@@ -1,17 +1,17 @@
 import {String as StringType, Number as NumberType, irreducible, refinement, struct, maybe} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
-import {Model} from './model'
+import {Entity} from './entity'
 import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRH')
 const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'PositiveIntegerType')
 
-export class StaRH extends Model {
+export class StaRH extends Entity {
   /**
-   * @param {{from: PersonType, to: PersonType, amount: number, message: string, $createdAt: Date}} fields
+   * @param {{$id: string, from: {name: string, avatar: URIValue|undefined}, to: {name: string, avatar: URIValue|undefined}, amount: number, message: string, $createdAt: Date}} fields
    */
   constructor (fields) {
-    const {from, to, amount, message, $createdAt} = fields
-    super({$context, $createdAt})
+    const {$id, from, to, amount, message, $createdAt} = fields
+    super({$id, $context, $createdAt})
     PersonType(from)
     PersonType(to)
     PositiveIntegerType(amount)
@@ -23,7 +23,7 @@ export class StaRH extends Model {
   }
 
   /**
-   * @returns {{from: string, to: string, amount: number, message: string, $createdAt: string, $context: string, $links: Array<{href: string, $context: string}>}}
+   * @returns {{$id: string, from: string, to: string, amount: number, message: string, $createdAt: string, $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
     return merge(
@@ -44,7 +44,7 @@ export class StaRH extends Model {
   }
 
   /**
-   * @param {{from: {name: string, avatar: string}, to: {name: string, avatar: string}, amount: number, message: string}} data
+   * @param {{$id: string, from: {name: string, avatar: string}, to: {name: string, avatar: string}, amount: number, message: string}} data
    * @returns {StaRH}
    */
   static fromJSON (data) {

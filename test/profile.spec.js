@@ -11,6 +11,7 @@ describe('Profile', () => {
   describe('constructor()', () => {
     it('should accept values', () => {
       const profile = new Profile({
+        $id: 'some-id',
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
@@ -26,12 +27,14 @@ describe('Profile', () => {
     })
     it('should parse it\'s own values', () => {
       const profile = new Profile({
+        $id: 'some-id',
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
         avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       })
       const profile2 = new Profile({
+        $id: profile.$id,
         email: profile.email,
         firstname: profile.firstname,
         lastname: profile.lastname,
@@ -50,6 +53,7 @@ describe('Profile', () => {
   describe('.name', () => {
     it('should not add spaces if name parts ar missing', () => {
       const profile = new Profile({
+        $id: 'some-id',
         email: new EmailValue('john.doe@example.com'),
         firstname: '',
         lastname: 'Doe'
@@ -66,6 +70,7 @@ describe('Profile', () => {
   describe('JSON', () => {
     it('should parse it\'s JSON representation', () => {
       const profile = Profile.fromJSON(JSON.parse(JSON.stringify(new Profile({
+        $id: 'some-id',
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',

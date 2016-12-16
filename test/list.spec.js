@@ -9,6 +9,7 @@ import {StaRH} from '../src/starh'
 import URIValue from 'rheactor-value-objects/uri'
 
 const items = [new StaRH({
+  $id: '17',
   from: {
     name: 'Markus Tacker',
     avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')

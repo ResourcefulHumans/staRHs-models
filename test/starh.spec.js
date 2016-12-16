@@ -10,6 +10,7 @@ describe('StaRH', () => {
   describe('constructor()', () => {
     it('should accept values', () => {
       const staRH = new StaRH({
+        $id: 'some-id',
         from: {
           name: 'Markus Tacker',
           avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')
@@ -19,7 +20,8 @@ describe('StaRH', () => {
           avatar: new URIValue('https://starhs.net/profileimgs/8651161a-ac33-4837-9c33-87997ce7bdc1.jpg')
         },
         amount: 1,
-        message: 'Test'
+        message: 'Test',
+        $createdAt: new Date()
       })
       StaRHType(staRH)
       expect(staRH.from.name).to.equal('Markus Tacker')
@@ -32,6 +34,7 @@ describe('StaRH', () => {
     })
     it('should parse it\'s own values', () => {
       const staRH = new StaRH({
+        $id: 'some-id',
         from: {
           name: 'Markus Tacker',
           avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')
@@ -41,13 +44,16 @@ describe('StaRH', () => {
           avatar: new URIValue('https://starhs.net/profileimgs/8651161a-ac33-4837-9c33-87997ce7bdc1.jpg')
         },
         amount: 1,
-        message: 'Test'
+        message: 'Test',
+        $createdAt: new Date()
       })
       const staRH2 = new StaRH({
+        $id: staRH.$id,
         from: staRH.from,
         to: staRH.to,
         amount: staRH.amount,
-        message: staRH.message
+        message: staRH.message,
+        $createdAt: staRH.$createdAt
       })
       StaRHType(staRH2)
       expect(staRH2.from.name).to.equal('Markus Tacker')
@@ -63,6 +69,7 @@ describe('StaRH', () => {
   describe('JSON', () => {
     it('should parse it\'s JSON representation', () => {
       const staRH = StaRH.fromJSON(JSON.parse(JSON.stringify(new StaRH({
+        $id: 'some-id',
         from: {
           name: 'Markus Tacker',
           avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')
@@ -72,7 +79,8 @@ describe('StaRH', () => {
           avatar: new URIValue('https://starhs.net/profileimgs/8651161a-ac33-4837-9c33-87997ce7bdc1.jpg')
         },
         amount: 1,
-        message: 'Test'
+        message: 'Test',
+        $createdAt: new Date()
       }))))
       StaRHType(staRH)
       expect(staRH.from.name).to.equal('Markus Tacker')

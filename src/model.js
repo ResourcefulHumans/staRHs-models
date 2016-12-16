@@ -25,9 +25,9 @@ export class Model {
   toJSON () {
     return {
       $context: this.$context.toString(),
-      $createdAt: this.$createdAt ? this.$createdAt.toUTCString() : undefined,
-      $updatedAt: this.$updatedAt ? this.$updatedAt.toUTCString() : undefined,
-      $deletedAt: this.$deletedAt ? this.$deletedAt.toUTCString() : undefined,
+      $createdAt: this.$createdAt ? this.$createdAt.toISOString() : undefined,
+      $updatedAt: this.$updatedAt ? this.$updatedAt.toISOString() : undefined,
+      $deletedAt: this.$deletedAt ? this.$deletedAt.toISOString() : undefined,
       $links: this.$links
     }
   }

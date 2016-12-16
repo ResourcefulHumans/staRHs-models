@@ -62,4 +62,28 @@ describe('Model', () => {
       expect(model.$links).to.deep.equal([])
     })
   })
+
+  describe('.$modifiedAt', () => {
+    it('should return $createdAt if defined', () => {
+      const model = new Model({
+        $context: $context,
+        $createdAt: new Date('2016-01-01T00:00:00Z')
+      })
+      expect(model.$modifiedAt.toISOString()).to.equal(new Date('2016-01-01T00:00:00Z').toISOString())
+    })
+    it('should return $updatedAt if defined', () => {
+      const model = new Model({
+        $context: $context,
+        $updatedAt: new Date('2016-01-02T00:00:00Z')
+      })
+      expect(model.$modifiedAt.toISOString()).to.equal(new Date('2016-01-02T00:00:00Z').toISOString())
+    })
+    it('should return $deletedAt if defined', () => {
+      const model = new Model({
+        $context: $context,
+        $deletedAt: new Date('2016-01-03T00:00:00Z')
+      })
+      expect(model.$modifiedAt.toISOString()).to.equal(new Date('2016-01-03T00:00:00Z').toISOString())
+    })
+  })
 })

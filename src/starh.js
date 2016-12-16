@@ -48,6 +48,7 @@ export class StaRH extends Model {
    * @returns {StaRH}
    */
   static fromJSON (data) {
+    StaRHJSONType(data)
     return new StaRH(
       merge(
         super.fromJSON(data),
@@ -75,5 +76,15 @@ export class StaRH extends Model {
   }
 }
 
+export const PersonJSONType = struct({
+  name: StringType,
+  avatar: maybe(StringType)
+}, 'PersonJSONType')
+export const StaRHJSONType = struct({
+  from: PersonJSONType,
+  to: PersonJSONType,
+  amount: NumberType,
+  message: StringType
+}, 'StaRHJSONType')
 export const StaRHType = irreducible('StaRHType', (x) => x instanceof StaRH)
 export const PersonType = struct({name: StringType, avatar: maybe(URIValue.Type)}, 'PersonType')

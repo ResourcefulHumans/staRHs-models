@@ -1,4 +1,4 @@
-import {String as StringType, irreducible, maybe} from 'tcomb'
+import {String as StringType, irreducible, maybe, struct} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import EmailValue from 'rheactor-value-objects/email'
 import {Model} from './model'
@@ -52,6 +52,7 @@ export class Profile extends Model {
    * @returns {Profile}
    */
   static fromJSON (data) {
+    ProfileJSONType(data)
     const {email, firstname, lastname, avatar} = data
     return new Profile(
       merge(
@@ -74,4 +75,10 @@ export class Profile extends Model {
   }
 }
 
+export const ProfileJSONType = struct({
+  email: StringType,
+  firstname: StringType,
+  lastname: StringType,
+  avatar: StringType
+}, 'ProfileJSONType')
 export const ProfileType = irreducible('ProfileType', (x) => x instanceof Profile)

@@ -1,5 +1,5 @@
 import URIValue from 'rheactor-value-objects/uri'
-import {irreducible, maybe, Date as DateType} from 'tcomb'
+import {irreducible, maybe, Date as DateType, String as StringType, struct} from 'tcomb'
 const maybeDate = maybe(DateType)
 
 export class Model {
@@ -37,6 +37,7 @@ export class Model {
    * @returns {Model}
    */
   static fromJSON (data) {
+    ModelJSONType(data)
     return new Model({
       $context: new URIValue(data.$context),
       $createdAt: data.$createdAt ? new Date(data.$createdAt) : undefined,
@@ -62,4 +63,10 @@ export class Model {
   }
 }
 
+export const ModelJSONType = struct({
+  $context: StringType,
+  $createdAt: maybe(StringType),
+  $updatedAt: maybe(StringType),
+  $deletedAt: maybe(StringType)
+}, 'ModelJSONType')
 export const ModelType = irreducible('ModelType', (x) => x instanceof Model)

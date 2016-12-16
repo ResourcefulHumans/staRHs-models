@@ -23,13 +23,14 @@ export class Model {
    * @returns {{$context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return {
+    const d = {
       $context: this.$context.toString(),
       $createdAt: this.$createdAt ? this.$createdAt.toISOString() : undefined,
       $updatedAt: this.$updatedAt ? this.$updatedAt.toISOString() : undefined,
-      $deletedAt: this.$deletedAt ? this.$deletedAt.toISOString() : undefined,
-      $links: this.$links
+      $deletedAt: this.$deletedAt ? this.$deletedAt.toISOString() : undefined
     }
+    if (this.$links.length) d.$links = this.$links.map(link => link.toJSON())
+    return d
   }
 
   /**

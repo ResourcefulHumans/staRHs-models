@@ -41,15 +41,16 @@ export class List {
    * @returns {{$context: string, $links: Array<object>, items: Array<object>, total: number, itemsPerPage: number, hasNext: boolean, hasPrev: boolean}}
    */
   toJSON () {
-    return {
+    const d = {
       $context: this.$context.toString(),
-      $links: this.$links.map(link => link.toJSON()),
       items: this.items.map(item => item.toJSON()),
       total: this.total,
       itemsPerPage: this.itemsPerPage,
       hasNext: this.hasNext,
       hasPrev: this.hasPrev
     }
+    if (this.$links.length) d.$links = this.$links.map(link => link.toJSON())
+    return d
   }
 
   /**
@@ -64,7 +65,7 @@ export class List {
       data.items.map(transformer),
       data.total,
       data.itemsPerPage,
-      data.$links.map(Link.fromJSON)
+      data.$links ? data.$links.map(Link.fromJSON) : []
     )
   }
 

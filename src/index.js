@@ -2,6 +2,8 @@ import {StaRH, StaRHType} from './starh'
 import {StaRHsStatus, StaRHsStatusType} from './starhs-status'
 import {Profile, ProfileType} from './profile'
 import {Model, ModelType} from './model'
+import {List, ListType} from './list'
+import {Link, LinkType} from './link'
 
 export {
   Model,
@@ -11,5 +13,9 @@ export {
   StaRHsStatus,
   StaRHsStatusType,
   Profile,
-  ProfileType
+  ProfileType,
+  List,
+  ListType,
+  Link,
+  LinkType
 }

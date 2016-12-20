@@ -4,6 +4,7 @@ import {Profile, ProfileType} from './profile'
 import {Model, ModelType} from './model'
 import {List, ListType} from './list'
 import {Link, LinkType} from './link'
+import {Status, StatusType} from './status'
 
 export {
   Model,
@@ -17,5 +18,7 @@ export {
   List,
   ListType,
   Link,
-  LinkType
+  LinkType,
+  Status,
+  StatusType
 }

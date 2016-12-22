@@ -1,4 +1,4 @@
-import {Number as NumberType, irreducible, refinement} from 'tcomb'
+import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import {Model} from './model'
 import {merge} from 'lodash'
@@ -45,6 +45,7 @@ export class StaRHsStatus extends Model {
    * @returns {StaRHsStatus}
    */
   static fromJSON (data) {
+    StaRHsStatusJSONType(data)
     return new StaRHsStatus(merge(super.fromJSON(data), data))
   }
 
@@ -56,4 +57,12 @@ export class StaRHsStatus extends Model {
   }
 }
 
+export const StaRHsStatusJSONType = struct({
+  $context: refinement(StringType, s => s === $context.toString(), 'StaRHsStatusContext'),
+  cycleShared: NumberType,
+  cycleReceived: NumberType,
+  cycleLeft: NumberType,
+  totalShared: NumberType,
+  totalReceived: NumberType
+}, 'StaRHsStatusJSONType')
 export const StaRHsStatusType = irreducible('StaRHsStatusType', (x) => x instanceof StaRHsStatus)

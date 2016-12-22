@@ -1,4 +1,4 @@
-import {String as StringType, irreducible, maybe, struct} from 'tcomb'
+import {String as StringType, irreducible, maybe, struct, refinement} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 import EmailValue from 'rheactor-value-objects/email'
 import {Entity} from './entity'
@@ -76,6 +76,7 @@ export class Profile extends Entity {
 }
 
 export const ProfileJSONType = struct({
+  $context: refinement(StringType, s => s === $context.toString(), 'ProfileContext'),
   email: StringType,
   firstname: StringType,
   lastname: StringType,

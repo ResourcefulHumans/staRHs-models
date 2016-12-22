@@ -78,7 +78,7 @@ export class List {
 }
 
 export const ListJSONType = struct({
-  $context: StringType,
+  $context: refinement(StringType, s => s === $context.toString(), 'ListContext'),
   $links: list(LinkJSONType),
   total: ZeroOrPositiveIntegerType,
   itemsPerPage: PositiveIntegerType

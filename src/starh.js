@@ -81,6 +81,7 @@ export const PersonJSONType = struct({
   avatar: maybe(StringType)
 }, 'PersonJSONType')
 export const StaRHJSONType = struct({
+  $context: refinement(StringType, s => s === $context.toString(), 'StaRHsContext'),
   from: PersonJSONType,
   to: PersonJSONType,
   amount: NumberType,

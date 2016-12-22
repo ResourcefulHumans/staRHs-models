@@ -1,4 +1,4 @@
-import {String as StringType, Boolean as BooleanType, irreducible, maybe, struct} from 'tcomb'
+import {String as StringType, Boolean as BooleanType, irreducible, maybe, struct, refinement} from 'tcomb'
 import URIValue from 'rheactor-value-objects/uri'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Link')
 
@@ -53,5 +53,11 @@ export class Link {
   }
 }
 
-export const LinkJSONType = struct({$context: StringType, subject: StringType, href: StringType, list: maybe(BooleanType), rel: maybe(StringType)}, 'LinkJSONType')
+export const LinkJSONType = struct({
+  $context: refinement(StringType, s => s === $context.toString(), 'LinkContext'),
+  subject: StringType,
+  href: StringType,
+  list: maybe(BooleanType),
+  rel: maybe(StringType)
+}, 'LinkJSONType')
 export const LinkType = irreducible('LinkType', (x) => x instanceof Link)

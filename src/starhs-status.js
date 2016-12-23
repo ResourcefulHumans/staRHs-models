@@ -10,7 +10,7 @@ export class StaRHsStatus extends Model {
    * @param {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number}} fields
    */
   constructor (fields) {
-    super({$context})
+    super(merge(fields, {$context}))
     const {cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived} = fields
     ZeroOrPositiveIntegerType(cycleShared)
     ZeroOrPositiveIntegerType(cycleReceived)

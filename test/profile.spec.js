@@ -4,6 +4,7 @@
 
 const expect = require('chai').expect
 import {Profile, ProfileType} from '../src/profile'
+import {Link} from '../src/link'
 import URIValue from 'rheactor-value-objects/uri'
 import EmailValue from 'rheactor-value-objects/email'
 
@@ -15,7 +16,15 @@ describe('Profile', () => {
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
-        avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
+        avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y'),
+        $links: [
+          new Link(
+            new URIValue('http://example.com/some-item/42'),
+            new URIValue('http://example.com/jsonld/some'),
+            true,
+            'colleagues'
+          )
+        ]
       })
       ProfileType(profile)
       expect(profile.email.toString()).to.equal('john.doe@example.com')
@@ -24,6 +33,8 @@ describe('Profile', () => {
       expect(profile.name).to.equal('John Doe')
       expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       expect(profile.$context.equals(Profile.$context)).to.equal(true)
+      expect(profile.$links.length).to.equal(1)
+      expect(profile.$links[0].rel).to.equal('colleagues')
     })
     it('should parse it\'s own values', () => {
       const profile = new Profile({
@@ -31,14 +42,23 @@ describe('Profile', () => {
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
-        avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
+        avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y'),
+        $links: [
+          new Link(
+            new URIValue('http://example.com/some-item/42'),
+            new URIValue('http://example.com/jsonld/some'),
+            true,
+            'colleagues'
+          )
+        ]
       })
       const profile2 = new Profile({
         $id: profile.$id,
         email: profile.email,
         firstname: profile.firstname,
         lastname: profile.lastname,
-        avatar: profile.avatar
+        avatar: profile.avatar,
+        $links: profile.$links
       })
       ProfileType(profile2)
       expect(profile2.email.toString()).to.equal('john.doe@example.com')
@@ -47,6 +67,8 @@ describe('Profile', () => {
       expect(profile2.name).to.equal('John Doe')
       expect(profile2.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       expect(profile2.$context.equals(Profile.$context)).to.equal(true)
+      expect(profile2.$links.length).to.equal(1)
+      expect(profile2.$links[0].rel).to.equal('colleagues')
     })
   })
 
@@ -74,7 +96,15 @@ describe('Profile', () => {
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
-        avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
+        avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y'),
+        $links: [
+          new Link(
+            new URIValue('http://example.com/some-item/42'),
+            new URIValue('http://example.com/jsonld/some'),
+            true,
+            'colleagues'
+          )
+        ]
       }))))
       ProfileType(profile)
       expect(profile.email.toString()).to.equal('john.doe@example.com')
@@ -83,6 +113,8 @@ describe('Profile', () => {
       expect(profile.name).to.equal('John Doe')
       expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       expect(profile.$context.equals(Profile.$context)).to.equal(true)
+      expect(profile.$links.length).to.equal(1)
+      expect(profile.$links[0].rel).to.equal('colleagues')
     })
   })
 })

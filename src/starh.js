@@ -10,8 +10,8 @@ export class StaRH extends Entity {
    * @param {{$id: string, from: {name: string, avatar: URIValue|undefined}, to: {name: string, avatar: URIValue|undefined}, amount: number, message: string, $createdAt: Date}} fields
    */
   constructor (fields) {
-    const {$id, from, to, amount, message, $createdAt} = fields
-    super({$id, $context, $createdAt})
+    const {from, to, amount, message} = fields
+    super(merge(fields, {$context}))
     PersonType(from)
     PersonType(to)
     PositiveIntegerType(amount)

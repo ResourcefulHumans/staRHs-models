@@ -1,15 +1,18 @@
 import URIValue from 'rheactor-value-objects/uri'
-import {irreducible, String as StringType, struct} from 'tcomb'
+import {irreducible, String as StringType, struct, maybe, list} from 'tcomb'
+import {Link, LinkJSONType} from './link'
+const LinkListType = list(Link)
 
 export class Model {
   /**
    * @param {{$context: URIValue}} fields
    */
   constructor (fields) {
-    const {$context} = fields
+    const {$context, $links} = fields
     URIValue.Type($context)
+    LinkListType($links || [])
     this.$context = $context
-    this.$links = []
+    this.$links = $links || []
   }
 
   /**
@@ -30,12 +33,14 @@ export class Model {
   static fromJSON (data) {
     ModelJSONType(data)
     return new Model({
-      $context: new URIValue(data.$context)
+      $context: new URIValue(data.$context),
+      $links: data.$links ? data.$links.map(l => Link.fromJSON(l)) : []
     })
   }
 }
 
 export const ModelJSONType = struct({
-  $context: StringType
+  $context: StringType,
+  $links: maybe(list(LinkJSONType))
 }, 'ModelJSONType')
 export const ModelType = irreducible('ModelType', (x) => x instanceof Model)

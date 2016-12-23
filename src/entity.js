@@ -9,8 +9,8 @@ export class Entity extends Model {
    * @param {{$id: string, $context: URIValue, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined}} fields
    */
   constructor (fields) {
-    const {$id, $context, $createdAt, $updatedAt, $deletedAt} = fields
-    super({$context})
+    const {$id, $createdAt, $updatedAt, $deletedAt} = fields
+    super(fields)
     StringType($id)
     maybeDate($createdAt)
     maybeDate($updatedAt)
@@ -42,13 +42,15 @@ export class Entity extends Model {
    */
   static fromJSON (data) {
     EntityJSONType(data)
-    return new Entity({
-      $id: data.$id,
-      $context: new URIValue(data.$context),
-      $createdAt: data.$createdAt ? new Date(data.$createdAt) : undefined,
-      $updatedAt: data.$updatedAt ? new Date(data.$updatedAt) : undefined,
-      $deletedAt: data.$deletedAt ? new Date(data.$deletedAt) : undefined
-    })
+    return new Entity(merge(
+      super.fromJSON(data), {
+        $id: data.$id,
+        $context: new URIValue(data.$context),
+        $createdAt: data.$createdAt ? new Date(data.$createdAt) : undefined,
+        $updatedAt: data.$updatedAt ? new Date(data.$updatedAt) : undefined,
+        $deletedAt: data.$deletedAt ? new Date(data.$deletedAt) : undefined
+      })
+    )
   }
 
   /**

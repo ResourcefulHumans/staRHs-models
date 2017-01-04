@@ -4,7 +4,7 @@
 
 import {expect} from 'chai'
 import {Entity, EntityType} from '../src/entity'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 
 const $context = new URIValue('http://example.com/jsonld/some')
 

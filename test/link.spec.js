@@ -4,7 +4,7 @@
 
 import {expect} from 'chai'
 import {Link, LinkType} from '../src/link'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 
 describe('Link', () => {
   describe('constructor()', () => {

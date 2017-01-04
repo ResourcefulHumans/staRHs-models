@@ -1,5 +1,5 @@
 import {String as StringType, Date as DateType, irreducible, refinement, struct} from 'tcomb'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Status')
 
 export class Status {

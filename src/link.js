@@ -1,5 +1,5 @@
 import {String as StringType, Boolean as BooleanType, irreducible, maybe, struct, refinement} from 'tcomb'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Link')
 
 export class Link {

@@ -5,8 +5,8 @@
 const expect = require('chai').expect
 import {Profile, ProfileType} from '../src/profile'
 import {Link} from '../src/link'
-import URIValue from 'rheactor-value-objects/uri'
-import EmailValue from 'rheactor-value-objects/email'
+import URIValue from 'rheactor-value-objects/dist/uri'
+import EmailValue from 'rheactor-value-objects/dist/email'
 
 describe('Profile', () => {
   describe('constructor()', () => {

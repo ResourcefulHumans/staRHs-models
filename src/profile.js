@@ -1,6 +1,6 @@
 import {String as StringType, irreducible, maybe, struct, refinement} from 'tcomb'
-import URIValue from 'rheactor-value-objects/uri'
-import EmailValue from 'rheactor-value-objects/email'
+import URIValue from 'rheactor-value-objects/dist/uri'
+import EmailValue from 'rheactor-value-objects/dist/email'
 import {Entity} from './entity'
 import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')

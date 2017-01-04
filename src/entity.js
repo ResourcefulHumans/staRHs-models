@@ -1,4 +1,4 @@
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 import {irreducible, maybe, Date as DateType, String as StringType, struct} from 'tcomb'
 import {Model} from './model'
 import {merge} from 'lodash'

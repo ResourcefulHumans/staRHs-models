@@ -1,5 +1,5 @@
 import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 import {Model} from './model'
 import {merge} from 'lodash'
 const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')

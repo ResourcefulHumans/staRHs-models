@@ -7,7 +7,7 @@ import {
   list,
   struct
 } from 'tcomb'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 import {Model} from './model'
 import {Link, LinkJSONType} from './link'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#List')

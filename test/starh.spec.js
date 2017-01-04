@@ -4,7 +4,7 @@
 
 import {expect} from 'chai'
 import {StaRH, StaRHType} from '../src/starh'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 
 describe('StaRH', () => {
   describe('constructor()', () => {

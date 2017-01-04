@@ -1,4 +1,4 @@
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 import {irreducible, String as StringType, struct, maybe, list} from 'tcomb'
 import {Link, LinkJSONType} from './link'
 const LinkListType = list(Link)

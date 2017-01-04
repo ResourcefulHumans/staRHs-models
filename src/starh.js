@@ -1,5 +1,5 @@
 import {String as StringType, Number as NumberType, irreducible, refinement, struct, maybe} from 'tcomb'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 import {Entity} from './entity'
 import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRH')

@@ -6,7 +6,7 @@ import {expect} from 'chai'
 import {List, ListType} from '../src/list'
 import {Link} from '../src/link'
 import {StaRH} from '../src/starh'
-import URIValue from 'rheactor-value-objects/uri'
+import URIValue from 'rheactor-value-objects/dist/uri'
 
 const items = [new StaRH({
   $id: '17',

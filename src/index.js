@@ -5,6 +5,7 @@ import {Model, ModelType} from './model'
 import {List, ListType} from './list'
 import {Link, LinkType} from './link'
 import {Status, StatusType} from './status'
+import {JsonWebTokenType} from './jsonwebtoken'
 
 export {
   Model,
@@ -20,5 +21,6 @@ export {
   Link,
   LinkType,
   Status,
-  StatusType
+  StatusType,
+  JsonWebTokenType
 }

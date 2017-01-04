@@ -71,5 +71,11 @@ describe('List', () => {
       expect(list.hasPrev).to.equal(false)
       expect(list.$links).to.deep.equal([link])
     })
+
+    it('should always return empty item and link arrays', () => {
+      let jsondata = JSON.parse(JSON.stringify(new List([], 0, 10)))
+      expect(jsondata.items, 'if empty items given, it should be empty in JSON').to.be.instanceof(Array)
+      expect(jsondata.$links, 'if empty $links given, it should be empty in JSON').to.be.instanceof(Array)
+    })
   })
 })

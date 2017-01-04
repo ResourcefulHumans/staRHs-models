@@ -47,7 +47,8 @@ export class List {
       total: this.total,
       itemsPerPage: this.itemsPerPage,
       hasNext: this.hasNext,
-      hasPrev: this.hasPrev
+      hasPrev: this.hasPrev,
+      $links: []
     }
     if (this.$links.length) d.$links = this.$links.map(link => link.toJSON())
     return d

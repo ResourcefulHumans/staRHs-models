@@ -2,11 +2,10 @@
 
 /* global describe, it */
 
-const expect = require('chai').expect
-import {Profile, ProfileType} from '../src/profile'
-import {Link} from '../src/link'
-import URIValue from 'rheactor-value-objects/dist/uri'
-import EmailValue from 'rheactor-value-objects/dist/email'
+import {expect} from 'chai'
+import {Profile, ProfileType} from '../src'
+import {Link} from 'rheactor-models'
+import {URIValue, EmailValue} from 'rheactor-value-objects'
 
 describe('Profile', () => {
   describe('constructor()', () => {

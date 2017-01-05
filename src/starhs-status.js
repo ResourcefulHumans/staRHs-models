@@ -1,6 +1,6 @@
 import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
-import URIValue from 'rheactor-value-objects/dist/uri'
-import {Model} from './model'
+import {URIValue} from 'rheactor-value-objects'
+import {Model} from 'rheactor-models'
 import {merge} from 'lodash'
 const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus')
@@ -65,4 +65,4 @@ export const StaRHsStatusJSONType = struct({
   totalShared: NumberType,
   totalReceived: NumberType
 }, 'StaRHsStatusJSONType')
-export const StaRHsStatusType = irreducible('StaRHsStatusType', (x) => x instanceof StaRHsStatus)
+export const StaRHsStatusType = irreducible('StaRHsStatusType', x => (x instanceof StaRHsStatus) || (x && x.constructor && x.constructor.name === StaRHsStatus.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context)))

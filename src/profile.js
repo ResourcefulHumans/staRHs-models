@@ -1,7 +1,6 @@
 import {String as StringType, irreducible, maybe, struct, refinement} from 'tcomb'
-import URIValue from 'rheactor-value-objects/dist/uri'
-import EmailValue from 'rheactor-value-objects/dist/email'
-import {Entity} from './entity'
+import {URIValue, EmailValue, EmailValueType, URIValueType} from 'rheactor-value-objects'
+import {Entity} from 'rheactor-models'
 import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
 
@@ -14,8 +13,8 @@ export class Profile extends Entity {
     super(merge(fields, {$context}))
     StringType(firstname)
     StringType(lastname)
-    EmailValue.Type(email)
-    maybe(URIValue.Type)(avatar)
+    EmailValueType(email)
+    maybe(URIValueType)(avatar)
     this.email = email
     this.firstname = firstname
     this.lastname = lastname
@@ -82,4 +81,4 @@ export const ProfileJSONType = struct({
   lastname: StringType,
   avatar: StringType
 }, 'ProfileJSONType')
-export const ProfileType = irreducible('ProfileType', (x) => x instanceof Profile)
+export const ProfileType = irreducible('ProfileType', x => (x instanceof Profile) || (x && x.constructor && x.constructor.name === Profile.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context)))

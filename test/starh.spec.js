@@ -3,8 +3,8 @@
 /* global describe, it */
 
 import {expect} from 'chai'
-import {StaRH, StaRHType} from '../src/starh'
-import URIValue from 'rheactor-value-objects/dist/uri'
+import {StaRH, StaRHType} from '../src'
+import {URIValue} from 'rheactor-value-objects'
 
 describe('StaRH', () => {
   describe('constructor()', () => {

@@ -2,8 +2,8 @@
 
 /* global describe, it */
 
-const expect = require('chai').expect
-import {StaRHsStatus, StaRHsStatusType} from '../src/starhs-status'
+import {expect} from 'chai'
+import {StaRHsStatus, StaRHsStatusType} from '../src'
 
 describe('StaRHsStatus', () => {
   describe('constructor()', () => {

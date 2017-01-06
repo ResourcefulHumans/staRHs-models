@@ -116,4 +116,10 @@ describe('Profile', () => {
       expect(profile.$links[0].rel).to.equal('colleagues')
     })
   })
+
+  describe('$context', () => {
+    it('should exist', () => {
+      expect(Profile.$context.toString()).to.equal('https://github.com/ResourcefulHumans/staRHs-models#Profile')
+    })
+  })
 })

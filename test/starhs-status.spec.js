@@ -48,4 +48,10 @@ describe('StaRHsStatus', () => {
       expect(status.$context.equals(StaRHsStatus.$context)).to.equal(true)
     })
   })
+
+  describe('$context', () => {
+    it('should exist', () => {
+      expect(StaRHsStatus.$context.toString()).to.equal('https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus')
+    })
+  })
 })

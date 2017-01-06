@@ -1,7 +1,6 @@
 import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
 import {URIValue} from 'rheactor-value-objects'
 import {Model} from 'rheactor-models'
-import {merge} from 'lodash'
 const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus')
 
@@ -10,7 +9,7 @@ export class StaRHsStatus extends Model {
    * @param {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number}} fields
    */
   constructor (fields) {
-    super(merge(fields, {$context}))
+    super(Object.assign(fields, {$context}))
     const {cycleShared, cycleReceived, cycleLeft, totalShared, totalReceived} = fields
     ZeroOrPositiveIntegerType(cycleShared)
     ZeroOrPositiveIntegerType(cycleReceived)
@@ -28,7 +27,7 @@ export class StaRHsStatus extends Model {
    * @returns {{cycleShared: number, cycleReceived: number, cycleLeft: number, totalShared: number, totalReceived: number, $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return merge(
+    return Object.assign(
       super.toJSON(),
       {
         cycleShared: this.cycleShared,
@@ -46,7 +45,7 @@ export class StaRHsStatus extends Model {
    */
   static fromJSON (data) {
     StaRHsStatusJSONType(data)
-    return new StaRHsStatus(merge(super.fromJSON(data), data))
+    return new StaRHsStatus(Object.assign(super.fromJSON(data), data))
   }
 
   /**

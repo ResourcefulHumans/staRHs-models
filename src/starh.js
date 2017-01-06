@@ -1,7 +1,6 @@
 import {String as StringType, Number as NumberType, irreducible, refinement, struct, maybe} from 'tcomb'
 import {URIValue, URIValueType} from 'rheactor-value-objects'
 import {Entity} from 'rheactor-models'
-import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRH')
 const PositiveIntegerType = refinement(NumberType, n => n > 0 && n % 1 === 0, 'PositiveIntegerType')
 
@@ -11,7 +10,7 @@ export class StaRH extends Entity {
    */
   constructor (fields) {
     const {from, to, amount, message} = fields
-    super(merge(fields, {$context}))
+    super(Object.assign(fields, {$context}))
     PersonType(from)
     PersonType(to)
     PositiveIntegerType(amount)
@@ -26,7 +25,7 @@ export class StaRH extends Entity {
    * @returns {{$id: string, from: string, to: string, amount: number, message: string, $createdAt: string, $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return merge(
+    return Object.assign(
       super.toJSON(),
       {
         from: {
@@ -50,7 +49,7 @@ export class StaRH extends Entity {
   static fromJSON (data) {
     StaRHJSONType(data)
     return new StaRH(
-      merge(
+      Object.assign(
         super.fromJSON(data),
         {
           from: {

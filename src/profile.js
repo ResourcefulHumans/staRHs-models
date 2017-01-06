@@ -1,7 +1,6 @@
 import {String as StringType, irreducible, maybe, struct, refinement} from 'tcomb'
 import {URIValue, EmailValue, EmailValueType, URIValueType} from 'rheactor-value-objects'
 import {Entity} from 'rheactor-models'
-import {merge} from 'lodash'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
 
 export class Profile extends Entity {
@@ -10,7 +9,7 @@ export class Profile extends Entity {
    */
   constructor (fields) {
     const {email, firstname, lastname, avatar} = fields
-    super(merge(fields, {$context}))
+    super(Object.assign(fields, {$context}))
     StringType(firstname)
     StringType(lastname)
     EmailValueType(email)
@@ -35,7 +34,7 @@ export class Profile extends Entity {
    * @returns {{$id: string, email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
-    return merge(
+    return Object.assign(
       super.toJSON(),
       {
         email: this.email.toString(),
@@ -54,7 +53,7 @@ export class Profile extends Entity {
     ProfileJSONType(data)
     const {email, firstname, lastname, avatar} = data
     return new Profile(
-      merge(
+      Object.assign(
         super.fromJSON(data),
         {
           email: new EmailValue(email),

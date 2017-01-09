@@ -54,6 +54,16 @@ export class StaRHsStatus extends Model {
   static get $context () {
     return $context
   }
+
+  /**
+   * Returns true if x is of type StaRHsStatus
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is(x) {
+    return (x instanceof StaRHsStatus) || (x && x.constructor && x.constructor.name === StaRHsStatus.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
+  }
 }
 
 export const StaRHsStatusJSONType = struct({
@@ -64,4 +74,4 @@ export const StaRHsStatusJSONType = struct({
   totalShared: NumberType,
   totalReceived: NumberType
 }, 'StaRHsStatusJSONType')
-export const StaRHsStatusType = irreducible('StaRHsStatusType', x => (x instanceof StaRHsStatus) || (x && x.constructor && x.constructor.name === StaRHsStatus.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context)))
+export const StaRHsStatusType = irreducible('StaRHsStatusType', StaRHsStatus.is)

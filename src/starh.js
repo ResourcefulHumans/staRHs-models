@@ -73,6 +73,16 @@ export class StaRH extends Entity {
   static get $context () {
     return $context
   }
+
+  /**
+   * Returns true if x is of type StaRH
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is(x) {
+    return (x instanceof StaRH) || (x && x.constructor && x.constructor.name === StaRH.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
+  }
 }
 
 export const PersonJSONType = struct({
@@ -86,5 +96,5 @@ export const StaRHJSONType = struct({
   amount: NumberType,
   message: StringType
 }, 'StaRHJSONType')
-export const StaRHType = irreducible('StaRHType', x => (x instanceof StaRH) || (x && x.constructor && x.constructor.name === StaRH.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context)))
+export const StaRHType = irreducible('StaRHType', StaRH.is)
 export const PersonType = struct({name: StringType, avatar: maybe(URIValueType)}, 'PersonType')

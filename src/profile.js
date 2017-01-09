@@ -71,6 +71,16 @@ export class Profile extends Entity {
   static get $context () {
     return $context
   }
+
+  /**
+   * Returns true if x is of type Profile
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is(x) {
+    return (x instanceof Profile) || (x && x.constructor && x.constructor.name === Profile.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
+  }
 }
 
 export const ProfileJSONType = struct({
@@ -80,4 +90,4 @@ export const ProfileJSONType = struct({
   lastname: StringType,
   avatar: StringType
 }, 'ProfileJSONType')
-export const ProfileType = irreducible('ProfileType', x => (x instanceof Profile) || (x && x.constructor && x.constructor.name === Profile.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context)))
+export const ProfileType = irreducible('ProfileType', Profile.is)

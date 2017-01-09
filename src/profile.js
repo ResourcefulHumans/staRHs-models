@@ -78,7 +78,7 @@ export class Profile extends Entity {
    * @param {object} x
    * @returns {boolean}
    */
-  static is(x) {
+  static is (x) {
     return (x instanceof Profile) || (x && x.constructor && x.constructor.name === Profile.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
   }
 }

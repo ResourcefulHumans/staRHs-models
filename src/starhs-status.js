@@ -1,7 +1,7 @@
-import {String as StringType, Number as NumberType, irreducible, refinement, struct} from 'tcomb'
+import {String as StringType, Integer as IntegerType, irreducible, refinement, struct} from 'tcomb'
 import {URIValue} from 'rheactor-value-objects'
 import {Model} from 'rheactor-models'
-const ZeroOrPositiveIntegerType = refinement(NumberType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
+const ZeroOrPositiveIntegerType = refinement(IntegerType, n => n >= 0 && n % 1 === 0, 'ZeroOrPositiveIntegerType')
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#StaRHsStatus')
 
 export class StaRHsStatus extends Model {
@@ -68,10 +68,10 @@ export class StaRHsStatus extends Model {
 
 export const StaRHsStatusJSONType = struct({
   $context: refinement(StringType, s => s === $context.toString(), 'StaRHsStatusContext'),
-  cycleShared: NumberType,
-  cycleReceived: NumberType,
-  cycleLeft: NumberType,
-  totalShared: NumberType,
-  totalReceived: NumberType
+  cycleShared: IntegerType,
+  cycleReceived: IntegerType,
+  cycleLeft: IntegerType,
+  totalShared: IntegerType,
+  totalReceived: IntegerType
 }, 'StaRHsStatusJSONType')
 export const StaRHsStatusType = irreducible('StaRHsStatusType', StaRHsStatus.is)

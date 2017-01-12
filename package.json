@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/ResourcefulHumans/staRHs-models#readme",
   "dependencies": {
-    "rheactor-models": "^2.4.0",
-    "rheactor-value-objects": "^8.0.0",
+    "rheactor-models": "2.x",
+    "rheactor-value-objects": "8.x",
     "tcomb": "^3.2.16"
   },
   "devDependencies": {

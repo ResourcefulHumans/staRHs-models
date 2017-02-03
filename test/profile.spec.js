@@ -15,6 +15,7 @@ describe('Profile', () => {
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
+        organization: 'ACME Inc.',
         avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y'),
         $links: [
           new Link(
@@ -29,6 +30,7 @@ describe('Profile', () => {
       expect(profile.email.toString()).to.equal('john.doe@example.com')
       expect(profile.firstname).to.equal('John')
       expect(profile.lastname).to.equal('Doe')
+      expect(profile.organization).to.equal('ACME Inc.')
       expect(profile.name).to.equal('John Doe')
       expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       expect(profile.$context.equals(Profile.$context)).to.equal(true)
@@ -41,6 +43,7 @@ describe('Profile', () => {
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
+        organization: 'ACME Inc.',
         avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y'),
         $links: [
           new Link(
@@ -56,6 +59,7 @@ describe('Profile', () => {
         email: profile.email,
         firstname: profile.firstname,
         lastname: profile.lastname,
+        organization: profile.organization,
         avatar: profile.avatar,
         $links: profile.$links
       })
@@ -63,6 +67,7 @@ describe('Profile', () => {
       expect(profile2.email.toString()).to.equal('john.doe@example.com')
       expect(profile2.firstname).to.equal('John')
       expect(profile2.lastname).to.equal('Doe')
+      expect(profile2.organization).to.equal('ACME Inc.')
       expect(profile2.name).to.equal('John Doe')
       expect(profile2.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       expect(profile2.$context.equals(Profile.$context)).to.equal(true)
@@ -84,6 +89,7 @@ describe('Profile', () => {
       expect(profile.firstname).to.equal('')
       expect(profile.lastname).to.equal('Doe')
       expect(profile.avatar).to.equal(undefined)
+      expect(profile.organization).to.equal(undefined)
       expect(profile.name).to.equal('Doe')
     })
   })
@@ -95,6 +101,7 @@ describe('Profile', () => {
         email: new EmailValue('john.doe@example.com'),
         firstname: 'John',
         lastname: 'Doe',
+        organization: 'ACME Inc.',
         avatar: new URIValue('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y'),
         $links: [
           new Link(
@@ -109,6 +116,7 @@ describe('Profile', () => {
       expect(profile.email.toString()).to.equal('john.doe@example.com')
       expect(profile.firstname).to.equal('John')
       expect(profile.lastname).to.equal('Doe')
+      expect(profile.organization).to.equal('ACME Inc.')
       expect(profile.name).to.equal('John Doe')
       expect(profile.avatar.toString()).to.equal('https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y')
       expect(profile.$context.equals(Profile.$context)).to.equal(true)

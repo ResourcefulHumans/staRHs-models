@@ -2,21 +2,24 @@ import {String as StringType, irreducible, maybe, struct, refinement} from 'tcom
 import {URIValue, EmailValue, EmailValueType, URIValueType} from 'rheactor-value-objects'
 import {Entity} from 'rheactor-models'
 const $context = new URIValue('https://github.com/ResourcefulHumans/staRHs-models#Profile')
+const MaybeStringType = maybe(StringType)
 
 export class Profile extends Entity {
   /**
-   * @param {{$id: string, email: EmailValue, firstname: string, lastname: string, avatar: URIValue, $links: Array.<Link>}} fields
+   * @param {{$id: string, email: EmailValue, firstname: string, lastname: string, organization: String|undefined, avatar: URIValue, $links: Array.<Link>}} fields
    */
   constructor (fields) {
-    const {email, firstname, lastname, avatar} = fields
+    const {email, firstname, lastname, organization, avatar} = fields
     super(Object.assign(fields, {$context}))
     StringType(firstname)
     StringType(lastname)
+    MaybeStringType(organization)
     EmailValueType(email)
     maybe(URIValueType)(avatar)
     this.email = email
     this.firstname = firstname
     this.lastname = lastname
+    this.organization = organization
     this.avatar = avatar
   }
 
@@ -31,7 +34,7 @@ export class Profile extends Entity {
   }
 
   /**
-   * @returns {{$id: string, email: string, firstname: string, lastname: string, avatar: (string|undefined), $context: string, $links: Array<{href: string, $context: string}>}}
+   * @returns {{$id: string, email: string, firstname: string, lastname: string, organization: String|undefined, avatar: (string|undefined), $context: string, $links: Array<{href: string, $context: string}>}}
    */
   toJSON () {
     return Object.assign(
@@ -40,18 +43,19 @@ export class Profile extends Entity {
         email: this.email.toString(),
         firstname: this.firstname,
         lastname: this.lastname,
+        organization: this.organization,
         avatar: this.avatar ? this.avatar.toString() : undefined
       }
     )
   }
 
   /**
-   * @param {{$id: string, email: string, firstname: string, lastname: string, avatar: string, $links: Array<{href: string, $context: string}>}} data
+   * @param {{$id: string, email: string, firstname: string, lastname: string, organization: String|undefined, avatar: string, $links: Array<{href: string, $context: string}>}} data
    * @returns {Profile}
    */
   static fromJSON (data) {
     ProfileJSONType(data)
-    const {email, firstname, lastname, avatar} = data
+    const {email, firstname, lastname, organization, avatar} = data
     return new Profile(
       Object.assign(
         super.fromJSON(data),
@@ -59,6 +63,7 @@ export class Profile extends Entity {
           email: new EmailValue(email),
           firstname,
           lastname,
+          organization,
           avatar: avatar ? new URIValue(avatar) : avatar
         }
       )
@@ -88,6 +93,7 @@ export const ProfileJSONType = struct({
   email: StringType,
   firstname: StringType,
   lastname: StringType,
+  organization: MaybeStringType,
   avatar: StringType
 }, 'ProfileJSONType')
 export const ProfileType = irreducible('ProfileType', Profile.is)

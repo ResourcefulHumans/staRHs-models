@@ -10,7 +10,7 @@ describe('StaRH', () => {
   describe('constructor()', () => {
     it('should accept values', () => {
       const staRH = new StaRH({
-        $id: 'some-id',
+        $id: new URIValue('http://example.com/user/some-id'),
         from: {
           name: 'Markus Tacker',
           avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')
@@ -34,7 +34,7 @@ describe('StaRH', () => {
     })
     it('should parse it\'s own values', () => {
       const staRH = new StaRH({
-        $id: 'some-id',
+        $id: new URIValue('http://example.com/user/some-id'),
         from: {
           name: 'Markus Tacker',
           avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')
@@ -69,7 +69,7 @@ describe('StaRH', () => {
   describe('JSON', () => {
     it('should parse it\'s JSON representation', () => {
       const staRH = StaRH.fromJSON(JSON.parse(JSON.stringify(new StaRH({
-        $id: 'some-id',
+        $id: new URIValue('http://example.com/user/some-id'),
         from: {
           name: 'Markus Tacker',
           avatar: new URIValue('https://starhs.net/profileimgs/5d257110-49c4-45e4-b8d5-2b69abf2419d.jpg')

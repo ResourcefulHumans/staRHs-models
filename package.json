@@ -27,9 +27,10 @@
     "url": "https://github.com/ResourcefulHumans/staRHs-models/issues"
   },
   "homepage": "https://github.com/ResourcefulHumans/staRHs-models#readme",
-  "dependencies": {
-    "rheactor-models": "2.x",
-    "rheactor-value-objects": "8.x",
+  "peerDependencies": {
+    "@resourcefulhumans/rheactor-errors": "1.x",
+    "rheactor-models": "3.x >=3.2.1",
+    "rheactor-value-objects": "9.x >=9.0.1",
     "tcomb": "^3.2.16"
   },
   "devDependencies": {

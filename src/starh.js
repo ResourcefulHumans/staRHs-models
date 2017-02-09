@@ -29,10 +29,12 @@ export class StaRH extends Entity {
       super.toJSON(),
       {
         from: {
+          $id: this.from.$id.toString(),
           name: this.from.name,
           avatar: this.from.avatar ? this.from.avatar.toString() : undefined
         },
         to: {
+          $id: this.to.$id.toString(),
           name: this.to.name,
           avatar: this.to.avatar ? this.to.avatar.toString() : undefined
         },
@@ -53,10 +55,12 @@ export class StaRH extends Entity {
         super.fromJSON(data),
         {
           from: {
+            $id: new URIValue(data.from.$id),
             name: data.from.name,
             avatar: data.from.avatar ? new URIValue(data.from.avatar) : undefined
           },
           to: {
+            $id: new URIValue(data.to.$id),
             name: data.to.name,
             avatar: data.to.avatar ? new URIValue(data.to.avatar) : undefined
           },
@@ -86,6 +90,7 @@ export class StaRH extends Entity {
 }
 
 export const PersonJSONType = struct({
+  $id: StringType,
   name: StringType,
   avatar: maybe(StringType)
 }, 'PersonJSONType')
@@ -97,4 +102,4 @@ export const StaRHJSONType = struct({
   message: StringType
 }, 'StaRHJSONType')
 export const StaRHType = irreducible('StaRHType', StaRH.is)
-export const PersonType = struct({name: StringType, avatar: maybe(URIValueType)}, 'PersonType')
+export const PersonType = struct({$id: URIValueType, name: StringType, avatar: maybe(URIValueType)}, 'PersonType')

@@ -30,7 +30,7 @@
   "peerDependencies": {
     "@resourcefulhumans/rheactor-errors": "1.x",
     "rheactor-models": "3.x >=3.2.2",
-    "rheactor-value-objects": "9.x >=9.0.1",
+    "rheactor-value-objects": "10.0.0",
     "tcomb": "^3.2.16"
   },
   "devDependencies": {
